@@ -1,1 +1,1 @@
-# New Tuto Symfony
+# New Tuto Symfony 7
