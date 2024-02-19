@@ -5,8 +5,10 @@
 {% block body %}
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente qui voluptas laudantium saepe, culpa, similique, laborum est vero eius odio alias inventore nisi? Odit odio, amet iste vel debitis obcaecati.
     <ul>
+        {% for recipe in recipes %}
         <li>
-        <a href="{{ path('recipe.show', {id: 32, slug: 'pate-bolognaise'}) }}">Pate Bolognaise</a>
+        <a href="{{ path('recipe.show', {id: recipe.id, slug: recipe.slug}) }}">{{recipe.title()}}</a>
         </li>
+        {% endfor %}
     </ul>
 {% endblock %}
