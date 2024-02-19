@@ -36,6 +36,10 @@ class RecipeController extends AbstractController
 
         // dd($recipes);
 
+        //* Durée Total
+        $recipe = $em->getRepository(Recipe::class)->findTotalDuration() ;
+        dd($recipe) ;
+        
         return $this->render('recipe/index.html.twig', [
             'recipes' => $recipes
         ]) ;
