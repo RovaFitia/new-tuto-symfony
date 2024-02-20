@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Recipe;
+use App\Form\RecipeType;
 use App\Repository\RecipeRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
@@ -37,8 +38,8 @@ class RecipeController extends AbstractController
         // dd($recipes);
 
         //* Durée Total
-        $recipe = $em->getRepository(Recipe::class)->findTotalDuration() ;
-        dd($recipe) ;
+        // $recipe = $em->getRepository(Recipe::class)->findTotalDuration() ;
+        // dd($recipe) ;
         
         return $this->render('recipe/index.html.twig', [
             'recipes' => $recipes
@@ -55,6 +56,22 @@ class RecipeController extends AbstractController
 
         return $this->render('recipe/show.html.twig', [
             'recipe' => $recipe 
+        ]) ;
+    }
+
+    #[Route('/recettes/{id}/edit', name:'recipe.edit')]
+    public function edit(Request $request, Recipe $recipe, EntityManagerInterface $em) : Response
+    {
+        $form = $this->createForm(RecipeType::class, $recipe) ;
+        $form->handleRequest($request) ;
+        if($form->isSubmitted() && $form->isValid()) {
+            $em->flush() ;
+            // $this->addFlash('success', 'Le recette a été bien modifier!') ;
+            return $this->redirectToRoute('recipe.index') ;
+        }
+        return $this->render('recipe/edit.html.twig', [
+            'recipe' => $recipe ,
+            'form' => $form 
         ]) ;
     }
 }
