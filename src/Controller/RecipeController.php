@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Demo;
 use App\Entity\Recipe;
 use App\Form\RecipeType;
 use App\Repository\RecipeRepository;
@@ -11,9 +12,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class RecipeController extends AbstractController
 {
+    #[Route('/demo')]
+    public function demo(Demo $demo)
+    {
+        dd($demo) ;
+    }
     #[Route('/recettes', name: 'recipe.index')]
     public function index(Request $request,EntityManagerInterface $em): Response
     {
